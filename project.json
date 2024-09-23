@@ -1,0 +1,46 @@
+{
+  "name": "blocto-evm",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/blocto-evm/src",
+  "projectType": "library",
+  "targets": {
+    "post-build": {},
+    "build": {
+      "executor": "@nrwl/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/blocto-evm",
+        "entryFile": "packages/blocto-evm/src/index.ts",
+        "tsConfig": "packages/blocto-evm/tsconfig.lib.json",
+        "project": "packages/blocto-evm/package.json",
+        "rollupConfig": "packages/blocto-evm/rollup.config.cjs",
+        "buildableProjectDepsInPackageJsonType": "dependencies",
+        "updateBuildableProjectDepsInPackageJson": true,
+        "compiler": "tsc",
+        "format": ["esm", "cjs"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/blocto-evm/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/blocto-evm/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
